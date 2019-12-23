@@ -4,26 +4,30 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-
     [SerializeField]
-    private Joystick joystick;
-
+    private Joystick joystick; //secondo joystick --> camera + shooting
     [SerializeField]
     private GameObject proiettile;
 
+
+    [SerializeField]
+    private float waitTime = 100f;
+    private float timer;
+
     private CharacterController test;
 
-    // Update is called once per frame
     void Update()
     {
-        
-        if(Mathf.Abs(joystick.Horizontal) > 0.2f || Mathf.Abs(joystick.Vertical) > 0.2f)
+        if (Mathf.Abs(joystick.Horizontal) > 0.2f || Mathf.Abs(joystick.Vertical) > 0.2f)
         {
-           /* float horizontal = joystick.Horizontal * Time.deltaTime;
-            float vertical = joystick.Vertical * Time.deltaTime;
-            float rotZ = Mathf.Atan2(horizontal, vertical) * Mathf.Rad2Deg;
-            transform.rotation  test = Quaternion.Euler(0f, 0f, rotZ);
-            Instantiate(proiettile, Transform.Quaternion.Euler(0f, 0f, rotZ)));*/
+            float direzione = Mathf.Atan2(joystick.Vertical, joystick.Horizontal) * Mathf.Rad2Deg; //calcola la direzione del secondo joystick
+            transform.rotation = Quaternion.Euler(0f, 0f, direzione); //cambia direzione giocatore
+            timer++;
+            if (timer > waitTime)
+            {
+                GameObject prefab = Instantiate(proiettile, transform.position, Quaternion.Euler(0f, 0f, direzione)); //crea proiettile
+                timer = 0f;
+            }
         }
     }
 }

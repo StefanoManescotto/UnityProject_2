@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SpawnPoint
   - Stanza
+  - SpawnerNemici
+  - Proiettili
   layers:
   - Default
   - TransparentFX

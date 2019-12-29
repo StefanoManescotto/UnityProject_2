@@ -11,22 +11,25 @@ public class RoomGenScript : MonoBehaviour
     [SerializeField]
     private int numeroStanze = 5;
 
-    private List<GameObject> stanzeCreate;
+    private List<GameObject> stanzeCreate = new List<GameObject>();
 
     void Start()
     {
-        for(int i=0; i<numeroStanze; i++)
+
+        GameObject stanza;
+
+        for(int i=0; i<numeroStanze; i++) //ciclo per il numero delle stanze
         {
             if(i == 0)
             {
-                stanzeCreate.Add(Instantiate(stanze[0], Vector3.zero, Quaternion.identity));
-            }else if (i < numeroStanze)
+                stanzeCreate.Add(Instantiate(stanze[2], Vector3.zero, Quaternion.identity)); //creo prima stanza ('t')
+            }else if (i < numeroStanze - 1)
             {
-                //stanze tb
+                stanzeCreate.Add(Instantiate(stanze[1], posizioneStanzaSuccessiva(), Quaternion.identity));  //creo stanze in metà ('bt')
             }
             else
             {
-                //stanze b
+                stanzeCreate.Add(Instantiate(stanze[0], posizioneStanzaSuccessiva(), Quaternion.identity)); //creo ultima stanza ('b')
             }
         }
     }
@@ -36,10 +39,10 @@ public class RoomGenScript : MonoBehaviour
         
     }
 
-    void posizioneStanzaSuccessiva()
+    Vector3 posizioneStanzaSuccessiva()
     {
-        //TODO: aggiungere Gameobject spawner alle stanze
-        //TODO: stanzaCreate --> trova ultima stanza aggiunta, fare il getComponent allo spawner delle stanze e spawnare prossima stanza in quella posizione
+        Transform posizione = stanzeCreate[stanzeCreate.Count - 1].transform.Find("Spawner"); //posizione prossima stanza da creare
+        return posizione.position;
     }
-
+    
 }

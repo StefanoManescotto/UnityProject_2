@@ -9,12 +9,11 @@ public class SpawnNemici : MonoBehaviour
 
     void Start()
     {
-        Instantiate(enemy, transform.position, Quaternion.identity);
+        Instantiate(enemy, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //TODO: movimento nemici
     }
 }

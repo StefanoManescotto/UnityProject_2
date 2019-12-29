@@ -8,6 +8,9 @@ TagManager:
   - Stanza
   - SpawnerNemici
   - Proiettili
+  - SpawnStanze
+  - Enemy
+  - Gate
   layers:
   - Default
   - TransparentFX
